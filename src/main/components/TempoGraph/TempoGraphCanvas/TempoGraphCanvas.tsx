@@ -119,8 +119,8 @@ export const TempoGraphCanvas: VFC<TempoGraphCanvasProps> = observer(
       >
         <Lines width={width} zIndex={0} />
         <Transform matrix={scrollXMatrix}>
-          <TempoItems width={width} zIndex={1} />
-          <Beats height={height} beats={beats} zIndex={2} />
+          <Beats height={height} beats={beats} zIndex={1} />
+          <TempoItems width={width} zIndex={2} />
           <Selection rect={selectionRect} zIndex={3} />
           <Cursor x={cursorX} height={height} zIndex={4} />
         </Transform>
