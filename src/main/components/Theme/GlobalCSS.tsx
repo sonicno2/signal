@@ -20,6 +20,7 @@ export const GlobalCSS = () => {
           background-color: ${theme.backgroundColor};
           overscroll-behavior: none;
           font-family: ${theme.font};
+          overflow: hidden;
         }
 
         #root {
