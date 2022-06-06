@@ -75,9 +75,9 @@ export const PianoRollCanvas: FC<PianoRollStageProps> = observer(
           height={height}
           style={{ cursor: notesCursor }}
           onContextMenu={handleContextMenu}
-          onMouseDown={mouseHandler.onMouseDown}
-          onMouseMove={mouseHandler.onMouseMove}
-          onMouseUp={mouseHandler.onMouseUp}
+          onPointerDown={mouseHandler.onMouseDown}
+          onPointerMove={mouseHandler.onMouseMove}
+          onPointerUp={mouseHandler.onMouseUp}
         >
           <Transform matrix={scrollYMatrix}>
             <Lines zIndex={0} />

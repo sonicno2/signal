@@ -26,12 +26,12 @@ export const observeDrag = ({
       onClick?.(e)
     }
 
-    document.removeEventListener("mousemove", onGlobalMouseMove)
-    document.removeEventListener("mouseup", onGlobalMouseUp)
+    document.removeEventListener("pointermove", onGlobalMouseMove)
+    document.removeEventListener("pointerup", onGlobalMouseUp)
   }
 
-  document.addEventListener("mousemove", onGlobalMouseMove)
-  document.addEventListener("mouseup", onGlobalMouseUp)
+  document.addEventListener("pointermove", onGlobalMouseMove)
+  document.addEventListener("pointerup", onGlobalMouseUp)
 }
 
 export interface DragHandler2 {
@@ -61,10 +61,10 @@ export const observeDrag2 = (
       onClick?.(e)
     }
 
-    document.removeEventListener("mousemove", onGlobalMouseMove)
-    document.removeEventListener("mouseup", onGlobalMouseUp)
+    document.removeEventListener("pointermove", onGlobalMouseMove)
+    document.removeEventListener("pointerup", onGlobalMouseUp)
   }
 
-  document.addEventListener("mousemove", onGlobalMouseMove)
-  document.addEventListener("mouseup", onGlobalMouseUp)
+  document.addEventListener("pointermove", onGlobalMouseMove)
+  document.addEventListener("pointerup", onGlobalMouseUp)
 }
