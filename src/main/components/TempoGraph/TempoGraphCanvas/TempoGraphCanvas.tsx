@@ -86,7 +86,7 @@ export const TempoGraphCanvas: VFC<TempoGraphCanvasProps> = observer(
       [rootStore, transform, scrollLeft]
     )
 
-    const onMouseDownGraph =
+    const onPointerDownGraph =
       mouseMode === "pencil" ? pencilMouseDown : selectionMouseDown
 
     const onWheelGraph = useCallback(
@@ -113,7 +113,7 @@ export const TempoGraphCanvas: VFC<TempoGraphCanvasProps> = observer(
       <GLCanvas
         width={width}
         height={height}
-        onMouseDown={onMouseDownGraph}
+        onPointerDown={onPointerDownGraph}
         onWheel={onWheelGraph}
         style={style}
       >

@@ -18,7 +18,7 @@ export interface LineGraphCanvasProps {
   items: (IPoint & IDValue)[]
   controlPoints: (IRect & IDValue)[]
   style?: CSSProperties
-  onMouseDown: React.MouseEventHandler<Element>
+  onPointerDown: React.MouseEventHandler<Element>
   onContextMenu: React.MouseEventHandler<Element>
 }
 
@@ -32,7 +32,7 @@ export const LineGraphCanvas: VFC<LineGraphCanvasProps> = observer(
     style,
     maxValue,
     controlPoints,
-    onMouseDown,
+    onPointerDown,
     onContextMenu,
   }) => {
     const rootStore = useStores()
@@ -71,7 +71,7 @@ export const LineGraphCanvas: VFC<LineGraphCanvasProps> = observer(
       <GLCanvas
         width={width}
         height={height}
-        onMouseDown={onMouseDown}
+        onPointerDown={onPointerDown}
         onContextMenu={onContextMenu}
         style={style}
       >

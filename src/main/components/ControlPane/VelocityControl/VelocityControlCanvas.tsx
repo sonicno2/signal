@@ -85,7 +85,7 @@ export const VelocityControlCanvas: VFC<{ width: number; height: number }> =
     )
 
     return (
-      <GLCanvas width={width} height={height} onMouseDown={onMouseDown}>
+      <GLCanvas width={width} height={height} onPointerDown={onMouseDown}>
         <Transform matrix={scrollXMatrix}>
           <VelocityItems rects={items} />
           <Beats height={height} beats={beats} zIndex={2} />

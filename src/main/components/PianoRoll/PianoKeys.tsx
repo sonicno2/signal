@@ -161,7 +161,7 @@ const PianoKeys: FC<PianoKeysProps> = ({ numberOfKeys, keyHeight }) => {
     [keyHeight, numberOfKeys, theme, touchingKeys]
   )
 
-  const onMouseDown = useCallback(
+  const onPointerDown = useCallback(
     (e: React.MouseEvent) => {
       function pixelsToNoteNumber(y: number): number {
         return numberOfKeys - y / keyHeight
@@ -207,7 +207,7 @@ const PianoKeys: FC<PianoKeysProps> = ({ numberOfKeys, keyHeight }) => {
       draw={draw}
       width={width}
       height={keyHeight * numberOfKeys}
-      onMouseDown={onMouseDown}
+      onPointerDown={onPointerDown}
     />
   )
 }

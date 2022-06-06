@@ -249,7 +249,7 @@ export const ArrangeView: FC = observer(() => {
   const { onContextMenu: onTrackContextMenu, menuProps: trackMenuProps } =
     useContextMenu()
 
-  const onMouseDown = useCallback(
+  const onPointerDown = useCallback(
     (e: React.MouseEvent) => {
       switch (e.button) {
         case 0:
@@ -337,7 +337,7 @@ export const ArrangeView: FC = observer(() => {
       >
         <div
           ref={ref}
-          onMouseDown={onMouseDown}
+          onPointerDown={onPointerDown}
           onContextMenu={useCallback((e) => e.preventDefault(), [])}
           onWheel={onWheel}
           style={{

@@ -201,7 +201,7 @@ const PianoRuler: FC<PianoRulerProps> = observer(({ rulerStore, style }) => {
     )
   }
 
-  const onMouseDown: React.MouseEventHandler<HTMLCanvasElement> = useCallback(
+  const onPointerDown: React.MouseEventHandler<HTMLCanvasElement> = useCallback(
     (e) => {
       const tick = rulerStore.getTick(e.nativeEvent.offsetX)
       const quantizedTick = quantizer.round(tick)
@@ -269,7 +269,7 @@ const PianoRuler: FC<PianoRulerProps> = observer(({ rulerStore, style }) => {
         draw={draw}
         width={width}
         height={height}
-        onMouseDown={onMouseDown}
+        onPointerDown={onPointerDown}
         onContextMenu={onContextMenuWrapper}
         style={style}
       />

@@ -152,7 +152,7 @@ const LineGraph = observer(
         />
         <LineGraphCanvas
           style={{ cursor: controlCursor }}
-          onMouseDown={onMouseDown}
+          onPointerDown={onMouseDown}
           onContextMenu={onContextMenu}
           width={width}
           height={height}

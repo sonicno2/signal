@@ -214,7 +214,7 @@ const _ScrollBar: React.RefForwardingComponent<
       })
     }
 
-  const onMouseDownThumb = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onPointerDownThumb = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
 
     if (disabled) {
@@ -222,7 +222,6 @@ const _ScrollBar: React.RefForwardingComponent<
     }
 
     const elm = e.target as HTMLDivElement
-    const startPos = getPoint(e)
 
     if (elm.classList.contains("thumb")) {
       const startValue = scrollOffset
@@ -245,31 +244,31 @@ const _ScrollBar: React.RefForwardingComponent<
       <div
         className="button-backward"
         style={{ [lengthProp]: buttonLength }}
-        onMouseDown={handleMouseDown(-SCROLL_BASE_AMOUNT)}
+        onPointerDown={handleMouseDown(-SCROLL_BASE_AMOUNT)}
       >
         {triangle}
       </div>
       <div
         className="page-backward"
         style={{ [lengthProp]: pageForwardLength }}
-        onMouseDown={handleMouseDown(-4 * SCROLL_BASE_AMOUNT)}
+        onPointerDown={handleMouseDown(-4 * SCROLL_BASE_AMOUNT)}
       />
       {!disabled && (
         <Thumb
           className="thumb"
           style={{ [lengthProp]: thumbLength }}
-          onMouseDown={onMouseDownThumb}
+          onPointerDown={onPointerDownThumb}
         />
       )}
       <div
         className="page-forward"
         style={{ [lengthProp]: pageBackwardLength }}
-        onMouseDown={handleMouseDown(4 * SCROLL_BASE_AMOUNT)}
+        onPointerDown={handleMouseDown(4 * SCROLL_BASE_AMOUNT)}
       />
       <div
         className="button-forward"
         style={{ [lengthProp]: buttonLength }}
-        onMouseDown={handleMouseDown(SCROLL_BASE_AMOUNT)}
+        onPointerDown={handleMouseDown(SCROLL_BASE_AMOUNT)}
       >
         {triangle}
       </div>
