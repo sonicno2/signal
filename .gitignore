@@ -2,7 +2,8 @@
 logs
 *.log
 npm-debug.log*
-
+public/FluidR3_GM.sf2
+public/SGM-V2.01.sf2
 # Runtime data
 pids
 *.pid

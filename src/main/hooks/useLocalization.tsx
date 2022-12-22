@@ -4,5 +4,5 @@ import { useStores } from "./useStores"
 export const useLocalization = () => {
   const { settingStore } = useStores()
   return (key: string, defaultValue: string) =>
-    localized(key, defaultValue, settingStore.language ?? undefined)
+    localized(key, defaultValue, settingStore.language ?? "en")
 }

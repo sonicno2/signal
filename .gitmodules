@@ -1,0 +1,6 @@
+[submodule "src/lib/spectoda-js"]
+	path = src/lib/spectoda-js
+	url = https://github.com/Spectoda/spectoda-js.git
+[submodule "src/lib/webcomponents"]
+	path = src/lib/webcomponents
+	url = https://github.com/Tangle-System/webcomponents.git

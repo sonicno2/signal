@@ -4,6 +4,7 @@ import { AnyEvent, MIDIControlEvents } from "midifile-ts"
 import { computed, makeObservable, observable } from "mobx"
 import { SendableEvent, SynthOutput } from "../../main/services/SynthOutput"
 import { SongStore } from "../../main/stores/SongStore"
+import { spectodaDevice } from "../../spectoda/communication"
 import { filterEventsWithRange } from "../helpers/filterEvents"
 import { Beat, createBeatsInRange } from "../helpers/mapBeats"
 import {
@@ -74,13 +75,19 @@ export default class Player {
   }
 
   play() {
+    console.log("Yey playgin now")
     if (this.isPlaying) {
       console.warn("called play() while playing. aborted.")
       return
     }
     this._scheduler = new EventScheduler<PlayerEvent>(
-      (startTick, endTick) =>
-        filterEventsWithRange(this.song.allEvents, startTick, endTick).concat(
+      (startTick, endTick) => {
+        // console.log(startTick, endTick)
+        return filterEventsWithRange(
+          this.song.allEvents,
+          startTick,
+          endTick
+        ).concat(
           filterEventsWithRange(
             createBeatsInRange(
               this.song.measures,
@@ -91,7 +98,8 @@ export default class Player {
             startTick,
             endTick
           )
-        ),
+        )
+      },
       () => this.allNotesOffEvents(),
       this._currentTick,
       this.timebase,
@@ -173,6 +181,8 @@ export default class Player {
   private beatToEvents(beat: Beat): PlayerEvent[] {
     const velocity = beat.beat === 0 ? 100 : 70
     const noteNumber = beat.beat === 0 ? 76 : 77
+
+    // console.log(beat.tick, beat.beat, velocity, noteNumber)
     return [
       {
         ...noteOnMidiEvent(0, 9, noteNumber, velocity),
@@ -301,6 +311,23 @@ export default class Player {
         } else if (this._trackMute.shouldPlayTrack(e.trackId)) {
           // channel イベントを MIDI Output に送信
           // Send Channel Event to MIDI OUTPUT
+          // if (e.subtype === "noteOn") {
+          // console.log(e, delayTime, timestamp)
+          // }
+          // console.log(e.subtype)
+          if (e.subtype === "noteOn" || e.subtype === "noteOff") {
+            // console.log(e)
+            const noteVariant = e.noteNumber / 12
+            const noteNumberSimple = e.noteNumber % 12
+            // spectodaDevice.emitTimestampEvent("note" + noteVariant, e.velocity)
+            spectodaDevice.emitPercentageEvent(
+              "note" + Math.floor(noteVariant),
+              e.velocity > 100 ? 100 : e.velocity,
+              noteNumberSimple
+            )
+          }
+          // const noteVariant = e.
+          // spectodaDevice.emitTimestampEvent("note" + e., );
           this.sendEvent(e, delayTime, timestamp)
         }
       } else {

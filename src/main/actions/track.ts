@@ -66,7 +66,7 @@ export const createEvent =
       player,
       pianoRollStore: { quantizer },
     } = rootStore
-
+    // console.log("createEvent", e, tick)
     const selectedTrack = song.selectedTrack
     if (selectedTrack === undefined) {
       throw new Error("selected track is undefined")
@@ -137,12 +137,14 @@ export const updateEventsInRange =
         e.tick >= Math.min(minTick, _startTick) &&
         e.tick <= Math.max(maxTick, _endTick)
     )
+    // console.log("events", events)
 
     track.transaction((it) => {
       it.removeEvents(events.map((e) => e.id))
 
       const newEvents = closedRange(_startTick, _endTick, quantizer.unit).map(
         (tick) => ({
+          // a: console.log("Track", createEvent(getValue(tick)), tick),
           ...createEvent(getValue(tick)),
           tick,
         })

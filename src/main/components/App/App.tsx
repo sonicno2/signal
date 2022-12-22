@@ -6,6 +6,7 @@ import { defaultTheme } from "../../../common/theme/Theme"
 import { ActionDialog } from "../../../components/ActionDialog"
 import { PromptDialog } from "../../../components/PromptDialog"
 import { Toast } from "../../../components/Toast"
+import { TangleConnectionProvider } from "../../../spectoda/TangleConnectionContext"
 import { DialogProvider } from "../../hooks/useDialog"
 import { PromptProvider } from "../../hooks/usePrompt"
 import { StoreContext } from "../../hooks/useStores"
@@ -33,13 +34,15 @@ export function App() {
           <EmotionThemeProvider>
             <HelmetProvider>
               <ToastProvider component={Toast}>
-                <PromptProvider component={PromptDialog}>
-                  <DialogProvider component={ActionDialog}>
-                    <GlobalKeyboardShortcut />
-                    <GlobalCSS />
-                    <RootView />
-                  </DialogProvider>
-                </PromptProvider>
+                <TangleConnectionProvider>
+                  <PromptProvider component={PromptDialog}>
+                    <DialogProvider component={ActionDialog}>
+                      <GlobalKeyboardShortcut />
+                      <GlobalCSS />
+                      <RootView />
+                    </DialogProvider>
+                  </PromptProvider>
+                </TangleConnectionProvider>
               </ToastProvider>
             </HelmetProvider>
           </EmotionThemeProvider>
