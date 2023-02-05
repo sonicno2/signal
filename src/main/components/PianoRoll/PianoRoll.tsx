@@ -90,13 +90,21 @@ const PianoRollWrapper: FC = observer(() => {
         const scaleFactor = isTouchPadEvent(e.nativeEvent) ? 0.01 : -0.01
         const scaleXDelta = clamp(e.deltaY * scaleFactor, -0.15, 0.15) // prevent acceleration to zoom too fast
         s.scaleAroundPointX(scaleXDelta, e.nativeEvent.offsetX)
+      } else if (isTouchPadEvent(e.nativeEvent)) {
+        // touch pad scrolling
+        s.scrollBy(-e.deltaX, -e.deltaY)
       } else {
         // scrolling
-        const scaleFactor = isTouchPadEvent(e.nativeEvent)
-          ? 1
-          : transform.pixelsPerKey * WHEEL_SCROLL_RATE
-        const deltaY = e.deltaY * scaleFactor
-        s.scrollBy(-e.deltaX, -deltaY)
+        const scaleFactor = transform.pixelsPerKey * WHEEL_SCROLL_RATE
+        // treat horizontal and vertical scroll as one to standardize the platform differences
+        // in macOS, shift + scroll is horizontal scroll while in Windows, it is vertical scroll
+        const delta = (e.deltaX + e.deltaY) * scaleFactor
+        // scroll horizontally if shift key is pressed
+        if (e.shiftKey) {
+          s.scrollBy(-delta, 0)
+        } else {
+          s.scrollBy(0, -delta)
+        }
       }
     },
     [s, transform]
