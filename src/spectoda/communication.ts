@@ -57,6 +57,7 @@ if (typeof window !== "undefined") {
     }, 300)
   }
 }
+
 // process.env.NODE_ENV === "production" && spectodaDevice.assignConnector("webbluetooth");
 export { spectodaDevice }
 

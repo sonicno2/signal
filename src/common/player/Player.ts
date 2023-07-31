@@ -16,7 +16,7 @@ import { getStatusEvents } from "../track/selector"
 import { ITrackMute } from "../trackMute/ITrackMute"
 import { DistributiveOmit } from "../types"
 import EventScheduler from "./EventScheduler"
-import { convertTrackEvents, PlayerEvent } from "./PlayerEvent"
+import { PlayerEvent, convertTrackEvents } from "./PlayerEvent"
 
 export interface LoopSetting {
   begin: number
@@ -302,6 +302,7 @@ export default class Player {
     const events = this._scheduler.readNextEvents(this._currentTempo, timestamp)
 
     events.forEach(({ event: e, timestamp: time }) => {
+      console.log(e)
       if (e.type === "channel") {
         const delayTime = (time - timestamp) / 1000
         if (e.trackId === METRONOME_TRACK_ID) {
@@ -320,11 +321,45 @@ export default class Player {
             const noteVariant = e.noteNumber / 12
             const noteNumberSimple = e.noteNumber % 12
             // spectodaDevice.emitTimestampEvent("note" + noteVariant, e.velocity)
-            spectodaDevice.emitPercentageEvent(
-              "note" + Math.floor(noteVariant),
-              e.velocity > 100 ? 100 : e.velocity,
-              noteNumberSimple
-            )
+            function noteToDevId(note: number) {
+              switch (note) {
+                case 0:
+                  return 2
+                case 1:
+                  return 5
+                case 2:
+                  return 21
+                case 3:
+                  return 17
+                case 4:
+                  return 10
+                case 5:
+                  return 11
+                case 6:
+                  return 7
+                case 7:
+                  return 8
+                case 8:
+                  return 1
+                case 9:
+                  return 19
+                case 10:
+                  return 15
+                case 11:
+                  return 15
+                default:
+                  return 255
+              }
+            }
+            spectodaDevice.connected().then(async (v: boolean) => {
+              if (v) {
+                spectodaDevice.emitPercentageEvent(
+                  "note" + Math.floor(noteVariant),
+                  e.velocity > 100 ? 100 : e.velocity,
+                  noteToDevId(noteNumberSimple)
+                )
+              }
+            })
           }
           // const noteVariant = e.
           // spectodaDevice.emitTimestampEvent("note" + e., );

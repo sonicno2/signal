@@ -14,11 +14,11 @@ import { ExportStore } from "./ExportStore"
 import HistoryStore from "./HistoryStore"
 import { MIDIDeviceStore } from "./MIDIDeviceStore"
 import PianoRollStore from "./PianoRollStore"
-import { registerReactions } from "./reactions"
 import RootViewStore from "./RootViewStore"
 import Router from "./Router"
 import SettingStore from "./SettingStore"
 import TempoEditorStore from "./TempoEditorStore"
+import { registerReactions } from "./reactions"
 
 export default class RootStore {
   song: Song = emptySong()
@@ -48,7 +48,12 @@ export default class RootStore {
     const context = new (window.AudioContext || window.webkitAudioContext)()
     // this.synth = new SoundFontSynth(context, "/FluidR3_GM.sf2")
     // this.synth = new SoundFontSynth(context, "/SGM-V2.01.sf2")
-    this.synth = new SoundFontSynth(context, "/A320U.sf2")
+    // this.synth = new SoundFontSynth(context, "/winxp.sf2")
+    this.synth = new SoundFontSynth(context, "/TimGM6mb.sf2")
+    // this.synth = new SoundFontSynth(context, "/gm.sf2")
+
+
+    // this.synth = new SoundFontSynth(context, "/A320U.sf2")
     const metronomeSynth = new SoundFontSynth(context, "/A320U_drums.sf2")
     this.synthGroup.outputs.push({ synth: this.synth, isEnabled: true })
 
